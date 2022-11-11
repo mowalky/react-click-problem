@@ -24,14 +24,13 @@ function App() {
 
   const redoCircle = () => {
     let currentHistory = history;
-    let lastUndo = currentHistory.pop;
-    //setHistory(currentHistory);
+    let lastUndo = currentHistory.pop();
+    setHistory(currentHistory);
     setCircles([...circles, lastUndo]);
   };
 
   return (
     <>
-      {JSON.stringify(history)}
       <button onClick={() => undoCircle()}>Undo</button>
       <button onClick={() => redoCircle()}>Redo</button>
       <div className="App" onClick={(e) => getClickedPosition(e)}>
