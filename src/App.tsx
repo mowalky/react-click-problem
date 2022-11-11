@@ -15,14 +15,22 @@ function App() {
   const undoCircle = () => {
     let currentCircles = circles;
     const undo = currentCircles.pop();
-    setHistory([...history, undo]);
+    setHistory([undo, ...history]);
     console.log(currentCircles);
     setCircles([...currentCircles]);
+  };
+
+  const redoCircle = () => {
+    let lastUndo = history[0];
+    let newHistory = history.remove(0);
+    setHistory(newHistory);
+    setCircles([...circles, lastUndo]);
   };
 
   return (
     <>
       <button onClick={() => undoCircle()}>Undo</button>
+      <button onClick={() => redoCircle()}>Redo</button>
       <div className="App" onClick={(e) => getClickedPosition(e)}>
         {circles.length > 0 &&
           circles.map((circle: any, idx: number) => (
